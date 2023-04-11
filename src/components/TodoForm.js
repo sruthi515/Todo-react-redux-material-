@@ -1,11 +1,8 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
-import { setTitle, setError, addItem, editItem } from "../store/actions";
 import { useSelector, useDispatch } from "react-redux";
+import { setTitle, setError, addItem, editItem } from "../store/actions";
+import { makeStyles, Grid, Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Form = ({ ...props }) => {
+const TodoForm = ({ ...props }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { title, edit, error } = useSelector((s) => s);
@@ -28,11 +25,11 @@ const Form = ({ ...props }) => {
   const handleChange = (event) => {
     const title = event.target.value;
     dispatch(setTitle(title));
-    // if (title.length === 0) {
-    //   dispatch(setError("Please enter title"));
-    // } else {
-    //   dispatch(setError(""));
-    // }
+    if (title.length === 0) {
+      dispatch(setError("Please enter title"));
+    } else {
+      dispatch(setError(""));
+    }
   };
 
   const handleClick = () => {
@@ -77,4 +74,4 @@ const Form = ({ ...props }) => {
   );
 };
 
-export default Form;
+export default TodoForm;
